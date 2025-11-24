@@ -177,4 +177,89 @@ more(X) :-
 
 % 3
 
-pilots(lamb).
+%pilot(name).
+pilot(lamb).
+pilot(besenyei).
+pilot(chambliss).
+pilot(maclean).
+pilot(mangold).
+pilot(jones).
+pilot(bonhomme).
+
+%team(name,pilot).
+team(breitling,lamb).
+team(redbull,besenyei).
+team(redbull,chambliss).
+team(mediterranean,maclean).
+team(cobra,mangold).
+team(matador,jones).
+team(matador,bonhomme).
+
+%pilots(car,pilot).
+pilots(mx2,lamb).
+pilots(edge540,besenyei).
+pilots(edge540,chambliss).
+pilots(edge540,maclean).
+pilots(edge540,mangold).
+pilots(edge540,jones).
+pilots(edge540,bonhomme).
+
+%circuit
+circuit(istambul).
+circuit(budapest).
+circuit(porto).
+
+%won(circuit,pilot)
+won(porto,jones).
+won(budapest,mangold).
+won(istambul,mangold).
+
+%gates(circuit,number)
+gates(istambul,9).
+gates(budapest,6).
+gates(porto,5).
+
+%teamWin(team,circuit)
+teamWin(X,Y) :-
+    team(X,Z),
+    won(Y,Z).
+
+not_flying_edge540(Pilot) :-
+    pilot(Pilot),
+    \+ pilots(edge540, Pilot).
+
+won_more(X) :-
+    won(Y,X),
+    won(Z,X),
+    Y @> Z.
+
+/************************************************************************/
+
+% 4
+
+translate(1,'Integer Overflow').
+translate(2,'Division by Zero').
+translate(3,'ID Unknown').
+
+/************************************************************************/
+
+% 5
+
+job(technician, eleuterio).
+job(technician, juvenaldo).
+job(analyst, leonilde).
+job(analyst, marciliano).
+job(engineer, osvaldo).
+job(engineer, porfirio).
+job(engineer, reginaldo).
+job(supervisor, sisnando).
+job(chief_supervisor, gertrudes).
+job(secretary, felismina).
+job(director, asdrubal).
+
+supervised_by(technician, engineer).
+supervised_by(engineer, supervisor).
+supervised_by(analyst, supervisor).
+supervised_by(supervisor, chief_supervisor).
+supervised_by(chief_supervisor, director).
+supervised_by(secretary, director).
