@@ -88,8 +88,23 @@ grandmother(X,Y) :-
 siblings(X,Y) :- 
     parent(A,X), parent(B,X), A@>B, parent(A,Y), parent(B,Y), X\=Y.
 
-halfSiblings(X,Y) :- 
-    parent(A,X), parent(A,Y), X\=Y.
+halfsiblings(X,Y) :-
+    mother(Z,X),
+    mother(Z,Y),
+    father(W,X),
+    father(WW,Y),
+    W\=WW,
+    X\=Y,
+    X @< Y.
+
+halfsiblings(X,Y) :-
+    mother(Z,X),
+    mother(ZZ,Y),
+    father(W,X),
+    father(W,Y),
+    Z\=ZZ,
+    X\=Y,
+    X @< Y.
 
 cousins(X,Y) :-
     parent(A,X), parent(B,Y), siblings(A,B).
