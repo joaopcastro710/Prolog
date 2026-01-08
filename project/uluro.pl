@@ -63,3 +63,41 @@ check_constrains([C|Rest],Board) :-
     call(C,Board),
     check_constrains(Rest,Board).
 
+% Etapa 5 : solve/2 (Parte 1)
+
+solve(Constrains, Board) :-
+    board(Board),
+    check_constrains(Constrains,Board).
+
+
+
+
+%------ EXAMPLES--------
+%% 12 solutions
+example(1, [ next_to(white,orange),
+next_to(black,black),
+across(yellow,orange),
+next_to(green,yellow),
+position(blue,[1,2,6]),
+across(yellow,blue) ]).
+%% 1 solution
+example(2, [ across(white,yellow),
+position(black,[1,4]),
+position(yellow,[1,5]),
+next_to(green, blue),
+same_edge(blue,yellow),
+one_space(orange,black) ]).
+%% no solutions (5 constraints are satisfiable)
+example(3, [ across(white,yellow),
+position(black,[1,4]),
+position(yellow,[1,5]),
+same_edge(green, black),
+same_edge(blue,yellow),
+one_space(orange,black) ]).
+%% same as above, different order of constraints
+example(4, [ position(yellow,[1,5]),
+one_space(orange,black),
+same_edge(green, black),
+same_edge(blue,yellow),
+position(black,[1,4]),
+across(white,yellow) ]).
