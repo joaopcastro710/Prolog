@@ -54,3 +54,12 @@ same_edge(X,X,_).
 same_edge(X,Y,Board) :- common_edge(X,Y,Board).
 
 position(X,L,Board) :- position_board(X,L,Board).
+
+
+% Etapa 4 : Aplicar Restrições
+
+check_constrains([],_).
+check_constrains([C|Rest],Board) :-
+    call(C,Board),
+    check_constrains(Rest,Board).
+
