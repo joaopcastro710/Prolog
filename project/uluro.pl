@@ -95,6 +95,12 @@ best_score(Constraints, BestScore) :-
         Scores),
     max_list(Scores, BestScore).
 
+max_list([X], X).
+max_list([H|T], Max) :-
+    max_list(T, MaxT),
+    ( H > MaxT -> Max = H ; Max = MaxT ).
+
+
 %------ EXAMPLES--------
 %% 12 solutions
 example(1, [ next_to(white,orange),
@@ -124,3 +130,69 @@ same_edge(green, black),
 same_edge(blue,yellow),
 position(black,[1,4]),
 across(white,yellow) ]).
+
+% =========================================================
+% =============== COMANDOS DE TESTE =======================
+% =========================================================
+
+% ---------- Testar geração de tabuleiros ----------
+% ?- board(B).
+% ?- permutation([green,yellow,blue,orange,white,black], B).
+
+% ---------- Testar restrições individualmente ----------
+
+% next_to
+% ?- board(B), next_to(green, yellow, B).
+
+% one_space
+% ?- board(B), one_space(blue, orange, B).
+
+% across
+% ?- board(B), across(white, black, B).
+
+% same_edge
+% ?- board(B), same_edge(green, blue, B).
+
+% position
+% ?- board(B), position(blue, [1,2,6], B).
+
+% ---------- Testar aplicação de restrições ----------
+% ?- example(1,E), check_constraints(E, B).
+
+% ---------- PARTE 1 — solve/2 ----------
+
+% Exemplo 1 (várias soluções)
+% ?- example(1,E), solve(E, B).
+
+% Exemplo 2 (uma solução)
+% ?- example(2,E), solve(E, B).
+
+% Exemplo 3 (nenhuma solução)
+% ?- example(3,E), solve(E, B).
+
+% Exemplo 4 (ordem diferente)
+% ?- example(4,E), solve(E, B).
+
+% ---------- PARTE 2 — contar violações ----------
+
+% ?- example(3,E), board(B), count_violations(E, B, V).
+
+% ---------- PARTE 2 — best_score/2 ----------
+
+% ?- example(1,E), best_score(E, S).
+% Esperado: S = 0
+
+% ?- example(2,E), best_score(E, S).
+% Esperado: S = 0
+
+% ?- example(3,E), best_score(E, S).
+% Esperado: S = -1
+
+% ?- example(4,E), best_score(E, S).
+% Esperado: S = -1
+
+% ---------- Teste geral ----------
+% ?- example(N,E), solve(E,B).
+% ?- example(N,E), best_score(E,S).
+
+% =========================================================
