@@ -84,6 +84,16 @@ count_violations([C|Rest],Board,Count) :-
     Count is Rest+1.
 
 
+% Etapa 7 : best_score/2 (Parte 2)
+
+best_score(Constraints, BestScore) :-
+    findall(Score,
+        ( board(Board),
+          count_violations(Constraints, Board, V),
+          Score is -V
+        ),
+        Scores),
+    max_list(Scores, BestScore).
 
 %------ EXAMPLES--------
 %% 12 solutions
