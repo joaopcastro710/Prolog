@@ -70,6 +70,19 @@ solve(Constrains, Board) :-
     check_constrains(Constrains,Board).
 
 
+% Etapa 6 : contar violações
+
+count_violations([],_,0).
+
+count_violations([C|Rest],Board,Count) :-
+    call(C,Board),
+    count_violations(Rest,Board,Count).
+
+count_violations([C|Rest],Board,Count) :-
+    \+ call(C,Board),
+    count_violations(Rest,Board,Rest),
+    Count is Rest+1.
+
 
 
 %------ EXAMPLES--------
